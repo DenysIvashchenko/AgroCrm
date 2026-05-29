@@ -1,0 +1,310 @@
+@use '@angular/material' as mat;
+@use 'variables';
+
+
+html {
+  height: 100%;
+
+  @include mat.theme((color: (primary: mat.$green-palette,
+        tertiary: mat.$orange-palette,
+      ),
+      typography: 'Manrope',
+      density: 0,
+    ));
+
+  --agri-50: #E8F5E9;
+  --agri-100: #C8E6C9;
+  --agri-200: #A5D6A7;
+  --agri-300: #81C784;
+  --agri-400: #66BB6A;
+  --agri-500: #4CAF50;
+  --agri-600: #43A047;
+  --agri-700: #388E3C;
+  --agri-800: #2E7D32;
+  --agri-900: #1B5E20;
+  --agri-accent: #FFA000;
+  --agri-accent-lt: #FFF3E0;
+  --agri-info: #42A5F5;
+  --agri-info-lt: #E3F2FD;
+  --agri-danger: #EF5350;
+  --agri-danger-lt: #FFEBEE;
+  --agri-bg: #F7F9F7;
+  --agri-surface: #FFFFFF;
+  --agri-border: #E4EDE4;
+  --agri-text: #1B2B1C;
+  --agri-text-2: #5A7A5C;
+  --agri-text-muted: #9DB89E;
+  --c-primary: var(--agri-800);
+  --c-primary-light: var(--agri-500);
+  --c-primary-pale: var(--agri-50);
+  --c-primary-mid: var(--agri-200);
+  --c-warn: var(--agri-accent);
+  --c-warn-pale: var(--agri-accent-lt);
+  --c-info: var(--agri-info);
+  --c-info-pale: var(--agri-info-lt);
+  --c-danger: var(--agri-danger);
+  --c-danger-pale: var(--agri-danger-lt);
+  --c-bg: var(--agri-bg);
+  --c-surface: var(--agri-surface);
+  --c-border: var(--agri-border);
+  --c-text: var(--agri-text);
+  --c-text-2: var(--agri-text-2);
+  --c-text-muted: var(--agri-text-muted);
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--agri-bg);
+  color: var(--agri-text);
+  font-family: 'Manrope', sans-serif;
+  margin: 0;
+  height: 100%;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dark {
+  color-scheme: dark;
+
+  @include mat.theme((color: (primary: mat.$green-palette,
+        tertiary: mat.$orange-palette,
+        theme-type: dark,
+      ),
+      typography: 'Manrope',
+      density: 0,
+    ));
+
+  --agri-bg: #121A12;
+  --agri-surface: #1C271C;
+  --agri-border: #2A3D2A;
+  --agri-text: #E8F5E9;
+  --agri-text-2: #A5D6A7;
+  --agri-text-muted: #5A7A5C;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button {
+  border-radius: 12px !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+}
+
+.mat-mdc-outlined-button {
+  border-radius: 12px !important;
+  border-color: var(--agri-border) !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+}
+
+.mat-mdc-card {
+  border-radius: 16px !important;
+  border: 1px solid var(--agri-border) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .06), 0 4px 16px rgba(0, 0, 0, .04) !important;
+}
+
+.mat-mdc-form-field {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 13px !important;
+}
+
+.mat-mdc-option {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 13px !important;
+}
+
+.mat-mdc-select-panel {
+  border-radius: 12px !important;
+}
+
+.mat-mdc-table {
+  font-family: 'Manrope', sans-serif !important;
+  background: transparent !important;
+}
+
+.mat-mdc-header-cell {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: var(--agri-text-muted) !important;
+  border-bottom-color: var(--agri-border) !important;
+}
+
+.mat-mdc-cell {
+  font-size: 13px !important;
+  border-bottom-color: var(--agri-border) !important;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  background: var(--agri-50) !important;
+}
+
+// ── Chips ────────────────────────────────────────────────────
+.mat-mdc-chip {
+  border-radius: 20px !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+// ── Dialog ───────────────────────────────────────────────────
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 20px !important;
+}
+
+// ── Snackbar ─────────────────────────────────────────────────
+.mat-mdc-snack-bar-container {
+  border-radius: 12px !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 600 !important;
+
+  &.snack-success {
+    --mdc-snackbar-container-color: var(--agri-800);
+  }
+
+  &.snack-error {
+    --mdc-snackbar-container-color: var(--agri-danger);
+  }
+
+  &.snack-warn {
+    --mdc-snackbar-container-color: var(--agri-accent);
+  }
+}
+
+// ── Tooltip ──────────────────────────────────────────────────
+.mat-mdc-tooltip .mdc-tooltip__surface {
+  border-radius: 8px !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  background: var(--agri-text) !important;
+}
+
+// ── Progress bar ─────────────────────────────────────────────
+.mat-mdc-progress-bar {
+  border-radius: 10px !important;
+  --mdc-linear-progress-active-indicator-color: var(--agri-800);
+  --mdc-linear-progress-track-color: var(--agri-border);
+}
+
+// ── Nav list (sidebar) ───────────────────────────────────────
+.mat-mdc-nav-list .mat-mdc-list-item {
+  border-radius: 12px !important;
+  margin: 2px 8px !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+
+  &.active-link {
+    background: var(--agri-50) !important;
+    color: var(--agri-800) !important;
+    font-weight: 700 !important;
+  }
+}
+
+// ── Tabs ─────────────────────────────────────────────────────
+.mat-mdc-tab-labels {
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.mat-mdc-tab .mdc-tab__text-label {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+}
+
+.mat-mdc-tab-header {
+  border-bottom: 1px solid var(--agri-border) !important;
+}
+
+// ── Paginator ────────────────────────────────────────────────
+.mat-mdc-paginator {
+  font-family: 'Manrope', sans-serif !important;
+  background: transparent !important;
+}
+
+// ── Menu ─────────────────────────────────────────────────────
+.mat-mdc-menu-panel {
+  border-radius: 12px !important;
+  border: 1px solid var(--agri-border) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, .08) !important;
+}
+
+.mat-mdc-menu-item {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+// ─────────────────────────────────────────────────────────────
+//  SCROLLBAR
+// ─────────────────────────────────────────────────────────────
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--agri-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--agri-200);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--agri-400);
+}
+
+// ─────────────────────────────────────────────────────────────
+//  FOCUS RING
+// ─────────────────────────────────────────────────────────────
+*:focus-visible {
+  outline: 2px solid var(--agri-500) !important;
+  outline-offset: 2px !important;
+}
