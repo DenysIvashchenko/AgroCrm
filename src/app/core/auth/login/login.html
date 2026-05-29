@@ -1,3 +1,30 @@
-<main class="login">
-
+<main class="login" (submit)="onSubmit()">
+    <form [formGroup]="form" class="login-form">
+        <div class="header">
+            <h1 class="login-form__title">
+                <div class="icons">
+                    <mat-icon class="first-icon">eco</mat-icon>
+                    <mat-icon class="second-icon">eco</mat-icon>
+                </div>Agro-CRM
+            </h1>
+            <p>Login to your account</p>
+        </div>
+        <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Email" />
+            <mat-icon matSuffix>email</mat-icon>
+            @if (form.controls.email.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" placeholder="Password" />
+            <mat-icon matSuffix>lock</mat-icon>
+            @if (form.controls.password.hasError('required')) {
+            <mat-error>Password is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+        <button type="submit" [disabled]="form.invalid" matButton="filled">Login</button>
+    </form>
 </main>

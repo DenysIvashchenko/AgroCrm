@@ -1,5 +1,8 @@
-.sidebar {
+:host {
     grid-area: sidebar;
+}
+
+.sidebar {
     background: var(--color-sidebar-bg);
     border-right: 1px solid var(--color-border);
     display: flex;
@@ -22,16 +25,12 @@
     flex-direction: column;
 }
 
-.sidebar__logo svg {
-    flex-shrink: 0;
-}
-
 .sidebar__nav {
     flex: 1;
     padding: 0 8px;
 }
 
-.nav__item {
+.nav__item a {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -45,7 +44,7 @@
     margin-bottom: 2px;
 }
 
-.nav__item:hover {
+.nav__item:hover a {
     background: var(--color-primary-pale);
     color: var(--color-primary);
 }
@@ -54,15 +53,6 @@
     background: var(--color-primary-pale);
     color: var(--color-primary);
     font-weight: 700;
-}
-
-.nav__item svg {
-    opacity: .75;
-}
-
-.nav__item--active svg,
-.nav__item:hover svg {
-    opacity: 1;
 }
 
 /* sidebar – season */

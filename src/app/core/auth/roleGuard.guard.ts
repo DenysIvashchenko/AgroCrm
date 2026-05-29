@@ -1,10 +1,12 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export const roleGuard: CanActivateFn = (route, state) => {
     const authService = inject(AuthService);
     const router = inject(Router);
+    const snackBar = inject(MatSnackBar);
 
     if (!authService.isLoggedIn()) {
         router.navigate(['/login']);
@@ -21,8 +23,13 @@ export const roleGuard: CanActivateFn = (route, state) => {
         return true;
     }
 
-    //update to matirial alert
-    alert('Access denied. You do not have permission to view this page.');
+    snackBar.open('Access denied. You do not have permission to view this page.', 'Close', {
+        duration: 4000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+    });
+
     router.navigate(['/dashboard']);
     return false;
 };

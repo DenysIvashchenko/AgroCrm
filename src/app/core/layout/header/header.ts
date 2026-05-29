@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Logo } from '../../../shared/logo/logo';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,5 +7,5 @@ import { Logo } from '../../../shared/logo/logo';
   styleUrl: './header.scss',
 })
 export class Header {
-
+  public userInfo = inject(AuthService).userInfo;
 }

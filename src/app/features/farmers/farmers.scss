@@ -1,0 +1,221 @@
+:host {
+    display: block;
+    height: 100%;
+}
+
+.farmers-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 20px;
+}
+
+.farmer-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 12px;
+}
+
+.farmer-list {
+    display: flex;
+    flex-direction: column;
+    // overflow: auto;
+    // height: 100%; to make the list scrollable if it exceeds the container height
+
+    &.active {
+        background: #E8F5E9;
+    }
+}
+
+.card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .06), 0 4px 16px rgba(0, 0, 0, .04);
+    border: 1px solid #E4EDE4;
+}
+
+.farmer-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #E4EDE4;
+    cursor: pointer;
+    transition: background .2s ease;
+    position: relative;
+
+    &.active {
+        background: #E8F5E9;
+    }
+}
+
+.farmer-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+    background: #4CAF50;
+
+}
+
+.farmer-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.farmer-area {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1B2B1C;
+    margin-left: auto;
+    padding-right: 10px;
+    white-space: nowrap;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    &.green {
+        background: #4CAF50;
+    }
+}
+
+.profile-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid #E4EDE4;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 18px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.badge-green {
+    background: #E4EDE4;
+    color: #2E7D32;
+}
+
+.profile-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.profile-edit-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.kpi-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.kpi-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-right: 1px solid var(--color-border);
+}
+
+.mat-icon {
+    color: var(--color-text-secondary);
+}
+
+.kpi-item:last-child {
+    border-right: none
+}
+
+.kpi-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: var(--color-primary-pale);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0
+}
+
+.kpi-val {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -.4px
+}
+
+.kpi-label {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-top: 1px
+}
+
+.info-block {
+    padding: 20px;
+
+    .info-block-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 14px
+    }
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--color-border);
+
+    &:last-child {
+        border-bottom: none
+    }
+
+}
+
+.info-label {
+    font-size: 14px;
+    color: var(--color-primary-primary);
+    width: 80px;
+    flex-shrink: 0
+}
+
+.info-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text)
+}

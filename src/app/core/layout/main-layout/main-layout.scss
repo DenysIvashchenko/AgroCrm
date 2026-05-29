@@ -7,3 +7,10 @@
             "sidebar main";
         min-height: 100vh;
     }
+
+    .content {
+        grid-area: main;
+        padding: 24px;
+        overflow-y: auto;
+        height: 100%;
+    }

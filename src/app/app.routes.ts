@@ -5,25 +5,30 @@ import { authGuard } from './core/auth/auth.guard';
 
 export const routes: Routes = [
     {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'login'
+    },
+    {
         path: 'login',
         loadComponent: () => import('./core/auth/login/login').then((c) => c.Login),
     },
     {
         path: '',
         component: MainLayout,
-        // canActivate: [authGuard],
+        canActivate: [authGuard],
         children: [
             {
                 path: 'dashboard',
                 loadChildren: () => import('./features/dashboard/dashboard.routes').then((r) => r.DASHBOARD_ROUTES),
-                // canActivate: [roleGuard],
+                canActivate: [roleGuard],
                 data: { roles: ['ADMIN', 'AGRONOMIST', 'MANAGER', 'OPERATOR'] }
             },
             {
                 path: 'farmers',
                 loadChildren: () => import('./features/farmers/farmers.routes').then((r) => r.FARMERS_ROUTES),
-                // canActivate: [roleGuard],
-                data: { roles: ['ADMIN', 'AGRONOMIST'] }
+                canActivate: [roleGuard],
+                data: { roles: ['ADMIN', 'MANAGER'] }
             }
         ]
     },
