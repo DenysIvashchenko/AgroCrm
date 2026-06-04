@@ -1,6 +1,6 @@
 <header class="header">
   <div class="header__title-block">
-    <div class="header__title">Dashboard</div>
+    <div class="header__title">{{title()}}</div>
     <div class="header__subtitle">Review key performance indicators</div>
   </div>
 
@@ -13,7 +13,8 @@
   </button> -->
 
   <div class="header__user">
-    <div class="header__user-name">{{ userInfo()?.username }}</div>
-    <div class="header__user-role">{{ userInfo()?.roles }}</div>
+    <div class="header__user-name">{{ authService.userInfo()?.username }}</div>
+    <div class="header__user-role">{{ authService.userInfo()?.roles }}</div>
   </div>
+  <button matButton="outlined" (click)="logout()">Logout</button>
 </header>

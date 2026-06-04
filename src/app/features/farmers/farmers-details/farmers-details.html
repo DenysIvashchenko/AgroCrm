@@ -1,0 +1,176 @@
+@if(isLoading()) {
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+} @else {
+<div class="card info-block">
+    <div class="profile-header">
+        <div>
+            <button mat-icon-button (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+        </div>
+        <div class="profile-info">
+            <div class="profile-name">{{ farmer()?.fullName }} <span class="badge badge-green">{{
+                    farmer()?.status}}</span></div>
+        </div>
+        <div class="profile-actions">
+            <button matButton="tonal">
+                Edit Profile
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="kpi-bar">
+        <div class="kpi-item">
+            <div class="kpi-icon">
+                <mat-icon>pin_drop</mat-icon>
+            </div>
+            <div>
+                <div class="kpi-val">{{ farmer()?.totalLandHa }} ha</div>
+                <div class="kpi-label">Total Area</div>
+            </div>
+        </div>
+        <div class="kpi-item">
+            <div class="kpi-icon">
+                <mat-icon>map</mat-icon>
+            </div>
+            <div>
+                <div class="kpi-val">{{ farmer()?.fields?.length || 0 }}</div>
+                <div class="kpi-label">Fields</div>
+            </div>
+        </div>
+        <div class="kpi-item">
+            <div class="kpi-icon">
+                <mat-icon>eco</mat-icon>
+            </div>
+            <div>
+                <div class="kpi-val">{{ farmer()?.fields?.flatMap((f) => f.crops)?.length || 0 }}</div>
+                <div class="kpi-label">Crop Varieties</div>
+            </div>
+        </div>
+        <div class="kpi-item">
+            <div class="kpi-icon">
+                <mat-icon>show_chart</mat-icon>
+            </div>
+            <div>
+                <div class="kpi-val">{{ farmer()?.fields?.flatMap((f) => f.crops)?.[0]?.expectedYield || 0 }} t/ha
+                </div>
+                <div class="kpi-label">Average Yield</div>
+            </div>
+        </div>
+    </div>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab label="Overview">
+            <section class="info-block">
+                <div class="info-block-title">Information</div>
+                <div class="info-row">
+                    <mat-icon>location_on</mat-icon>
+                    <span class="info-label">Region</span>
+                    <span class="info-value">{{ farmer()?.region }}</span>
+                </div>
+                <div class="info-row">
+                    <mat-icon>email</mat-icon>
+                    <span class="info-label">Email</span>
+                    <span class="info-value">{{ farmer()?.email || 'N/A' }}</span>
+                </div>
+                <div class="info-row">
+                    <mat-icon>phone</mat-icon>
+                    <span class="info-label">Phone</span>
+                    <span class="info-value">{{ farmer()?.phone || 'N/A' }}</span>
+                </div>
+                <div class="info-row">
+                    <mat-icon>calendar_today</mat-icon>
+                    <span class="info-label">Created At</span>
+                    <span class="info-value">{{ farmer()?.createdAt | date:'medium' }}</span>
+                </div>
+                <div class="info-row">
+                    <mat-icon>person</mat-icon>
+                    <span class="info-label">Responsive Manager</span>
+                    <span class="info-value">{{ farmer()?.manager?.fullName }}</span>
+                </div>
+            </section>
+        </mat-tab>
+        <mat-tab label="Fields">
+            <section class="info-block field-table">
+                @if(farmer()?.fields?.length) {
+                <table mat-table [dataSource]="farmer()!.fields">
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let field"> {{field.id}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let field"> {{field.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="areaHa">
+                        <th mat-header-cell *matHeaderCellDef> Area (ha) </th>
+                        <td mat-cell *matCellDef="let field"> {{field.areaHa}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="soilType">
+                        <th mat-header-cell *matHeaderCellDef> Soil Type </th>
+                        <td mat-cell *matCellDef="let field"> {{field.soilType}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="createdAt">
+                        <th mat-header-cell *matHeaderCellDef> Created At </th>
+                        <td mat-cell *matCellDef="let field"> {{field.createdAt | date:'short'}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsField; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsField;"></tr>
+                </table>
+                } @else {
+                <p>No Field yet</p>
+                }
+            </section>
+        </mat-tab>
+        <mat-tab label="Crops">
+            <section class="info-block field-table">
+                @if (crops().length) {
+                <table mat-table [dataSource]="crops()">
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let crop"> {{crop.id}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let crop"> {{crop.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="season">
+                        <th mat-header-cell *matHeaderCellDef> Season </th>
+                        <td mat-cell *matCellDef="let crop"> {{crop.season}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                        <td mat-cell *matCellDef="let crop"> {{crop.status }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="expectedYield">
+                        <th mat-header-cell *matHeaderCellDef> ExpectedYield </th>
+                        <td mat-cell *matCellDef="let crop"> {{crop.expectedYield ? crop.expectedYield :
+                            'N/A'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="actualYield">
+                        <th mat-header-cell *matHeaderCellDef> ActualYield </th>
+                        <td mat-cell *matCellDef="let crop"> {{crop.actualYield ? crop.actualYield :
+                            'N/A'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="createdAt">
+                        <th mat-header-cell *matHeaderCellDef> Created At </th>
+                        <td mat-cell *matCellDef="let crop"> {{crop.createdAt | date:'short'}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsCrops; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsCrops;"></tr>
+                </table>
+                } @else {
+                <p>No Crops yet</p>
+                }
+            </section>
+        </mat-tab>
+        <mat-tab label="Documents">Documents</mat-tab>
+        <mat-tab label="History">History</mat-tab>
+    </mat-tab-group>
+</div>
+}

@@ -149,12 +149,16 @@ button {
 
 .mat-mdc-form-field {
   font-family: 'Manrope', sans-serif !important;
-  font-size: 13px !important;
+  font-size: 14px !important;
 }
 
 .mat-mdc-option {
   font-family: 'Manrope', sans-serif !important;
-  font-size: 13px !important;
+  font-size: 14px !important;
+}
+
+.mat-mdc-header-row {
+  background: #fff !important;
 }
 
 .mat-mdc-select-panel {
@@ -167,14 +171,14 @@ button {
 }
 
 .mat-mdc-header-cell {
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  color: var(--agri-text-muted) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--agri-900) !important;
   border-bottom-color: var(--agri-border) !important;
 }
 
 .mat-mdc-cell {
-  font-size: 13px !important;
+  font-size: 14px !important;
   border-bottom-color: var(--agri-border) !important;
 }
 
@@ -299,6 +303,22 @@ button {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--agri-400);
+}
+
+.filter {
+
+  .mat-mdc-text-field-wrapper {
+    height: 45px !important;
+  }
+
+  .mdc-text-field--outlined {
+    height: 45px !important;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper,
+  .mat-mdc-form-field-bottom-align::before {
+    display: none !important;
+  }
 }
 
 // // ─────────────────────────────────────────────────────────────

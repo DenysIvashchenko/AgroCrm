@@ -1,6 +1,6 @@
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../auth/auth.service';
-import { Logo } from './../../../shared/logo/logo';
+import { Logo } from '../../../shared/components/logo/logo';
 import { Component, inject } from '@angular/core';
 import { HasRole } from '../../../shared/directives/has-role';
 import { RouterLink, RouterLinkActive } from '@angular/router';

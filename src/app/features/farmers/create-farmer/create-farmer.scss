@@ -1,0 +1,35 @@
+.info {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+
+    mat-form-field {
+        width: 100%;
+    }
+}
+
+.personal-info {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.add-field {
+    display: flex;
+    padding: 0 10px;
+    justify-content: end;
+}
+
+.field-card {
+    flex: 1;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

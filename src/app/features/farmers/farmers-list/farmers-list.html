@@ -1,0 +1,67 @@
+<div class="farmer-list card">
+    <table mat-table matSort [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell mat-sort-header="id" *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let farmer"> {{farmer.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="photo">
+            <th mat-header-cell mat-sort-header="photo" *matHeaderCellDef> Photo </th>
+            <td mat-cell *matCellDef="let farmer">
+                <div class="farmer-avatar" [style]="{ 'background-color': farmer.color}">
+                    {{ farmer.fullName.split(' ').map((n) => n[0]).join('') }}
+                </div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="fullName">
+            <th mat-header-cell mat-sort-header="fullName" *matHeaderCellDef> Full Name </th>
+            <td mat-cell *matCellDef="let farmer"> {{farmer.fullName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="phone">
+            <th mat-header-cell mat-sort-header="phone" *matHeaderCellDef> Phone </th>
+            <td mat-cell *matCellDef="let farmer"> {{farmer.phone}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <th mat-header-cell mat-sort-header="email" *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let farmer"> {{farmer.email || 'N/A'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell mat-sort-header="status" *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let farmer"> <span class="status"
+                    [style.background-color]="farmer.statusColor">{{farmer.status}}</span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="totalLandHa">
+            <th mat-header-cell mat-sort-header="totalLandHa" *matHeaderCellDef> TotalLandHa </th>
+            <td mat-cell *matCellDef="let farmer"> {{farmer.totalLandHa}} </td>
+        </ng-container>
+        <ng-container matColumnDef="manager">
+            <th mat-header-cell mat-sort-header="manager" *matHeaderCellDef> Manager </th>
+            <td mat-cell *matCellDef="let farmer"> {{farmer.manager.fullName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fields">
+            <th mat-header-cell mat-sort-header="fields" *matHeaderCellDef>Total Fields </th>
+            <td mat-cell *matCellDef="let farmer"> {{farmer.fields.length || 'N/A'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+            <th mat-header-cell mat-sort-header="createdAt" *matHeaderCellDef> Created At </th>
+            <td mat-cell *matCellDef="let farmer"> {{farmer.createdAt | date:'short'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let farmer">
+                <div class="actions">
+                    <span class="view" (click)="this.eventFarmer.emit(farmer)">
+                        <mat-icon>visibility</mat-icon>
+                    </span>
+                    <span class="view" *appHasRole="['ADMIN', 'MANAGER']" (click)="eventDeleteFarmer.emit(farmer.id)">
+                        <mat-icon>delete</mat-icon>
+                    </span>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsField; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsField;"></tr>
+    </table>
+</div>

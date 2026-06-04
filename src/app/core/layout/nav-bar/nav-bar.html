@@ -7,7 +7,7 @@
 
   <nav class="sidebar__nav">
     <ul>
-      <li class="nav__item" *appHasRole="['ADMIN', 'AGRONOMIST', 'FARMER']">
+      <li class="nav__item" *appHasRole="['ADMIN', 'AGRONOMIST', 'MANAGER']">
         <a routerLink="/dashboard" routerLinkActive="nav__item--active">
           <mat-icon>dashboard</mat-icon>Dashboard
         </a>
@@ -17,13 +17,13 @@
           <mat-icon>groups</mat-icon>Farmers
         </a>
       </li>
-      <li class="nav__item" *appHasRole="['ADMIN', 'AGRONOMIST']">
+      <li class="nav__item" *appHasRole="['ADMIN', 'AGRONOMIST', 'MANAGER']">
         <a routerLink="/fields" routerLinkActive="nav__item--active">
           <mat-icon>map</mat-icon>
           Fields
         </a>
       </li>
-      <li class="nav__item" *appHasRole="['ADMIN', 'AGRONOMIST']">
+      <li class="nav__item" *appHasRole="['ADMIN', 'AGRONOMIST', 'MANAGER']">
         <a routerLink="/crops" routerLinkActive="nav__item--active">
           <mat-icon>eco</mat-icon>Crops
         </a>

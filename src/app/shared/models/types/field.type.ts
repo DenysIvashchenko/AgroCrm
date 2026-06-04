@@ -1,6 +1,6 @@
 import { Crop } from "./crop.type";
 import { Farmer } from "./farmer.type";
-import { SoilType } from "./soil-type.enum";
+import { SoilType } from "../enums/soil-type.enum";
 
 export interface Field {
     id: number;
@@ -9,7 +9,8 @@ export interface Field {
     soilType: SoilType;
     latitude: number;
     longitude: number;
-    boundaryCoordinates: number[][];
+    boundaryCoordinates: string;
+    colorField: string;
     farmer: Farmer;
     crops: Crop[];
     createdAt: string;

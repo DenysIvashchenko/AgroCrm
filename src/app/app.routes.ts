@@ -29,6 +29,12 @@ export const routes: Routes = [
                 loadChildren: () => import('./features/farmers/farmers.routes').then((r) => r.FARMERS_ROUTES),
                 canActivate: [roleGuard],
                 data: { roles: ['ADMIN', 'MANAGER'] }
+            },
+            {
+                path: 'fields',
+                loadChildren: () => import('./features/field/field.routers').then((r) => r.FIELD_ROUTES),
+                canActivate: [roleGuard],
+                data: { roles: ['ADMIN','MANAGER', 'AGRONOMIST'] }
             }
         ]
     },

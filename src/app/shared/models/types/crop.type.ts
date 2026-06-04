@@ -1,5 +1,6 @@
-import { CropStatus } from "./crops-status.enum";
+import { CropStatus } from "../enums/crops-status.enum";
 import { Field } from "./field.type";
+
 
 export interface Crop {
     id: number;

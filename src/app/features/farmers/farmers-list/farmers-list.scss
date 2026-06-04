@@ -1,0 +1,55 @@
+.farmer-list {
+    overflow: auto;
+    height: 650px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .06), 0 4px 16px rgba(0, 0, 0, .04);
+    border: 1px solid #E4EDE4;
+
+    .view {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .mat-icon {
+        color: var(--color-primary);
+
+        &:hover {
+            color: var(--color-primary-light);
+        }
+    }
+
+    .status {
+        padding: 1px 5px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: lowercase;
+        min-width: 64px;
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.farmer-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+    background: #4CAF50;
+
+}

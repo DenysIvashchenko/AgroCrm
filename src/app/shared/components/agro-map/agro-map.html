@@ -1,0 +1,19 @@
+<div class="map-shell">
+
+    <div class="map-hint">
+        <mat-icon>info_outline</mat-icon>
+        @if (readonly()) {
+        <span>Field Boundaries</span>
+        } @else {
+        <span>Click on the map to draw the field boundaries (minimum 3 points)</span>
+        }
+        @if (!readonly() && pointsCount() > 0) {
+        <span class="pts-badge">{{ pointsCount() }} points</span>
+        <button mat-icon-button class="clear-btn" (click)="clearPolygon()" matTooltip="Clear Polygon">
+            <mat-icon>restart_alt</mat-icon>
+        </button>
+        }
+    </div>
+
+    <div #mapEl class="leaflet-map"></div>
+</div>

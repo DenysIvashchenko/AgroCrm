@@ -1,117 +1,22 @@
-<div class="farmers-layout">
-    <div>
-        <div class="farmer-list-header">
-            <span>Farmers total: {{ farmers().length }}</span>
-        </div>
-        <div class="farmer-list card">
-            <div class="container-farmer-list">
-                @for (f of farmers();track f.id) {
-                <div class="farmer-item" (click)="selectFarmer(f)" [class.active]="farmer()?.id === f.id">
-                    <div class="farmer-avatar" [style]="{ 'background-color': f?.color}">
-                        {{ f.fullName.split(' ').map((n) => n[0]).join('') }}
-                    </div>
-                    <div class="farmer-info">
-                        <p>{{f.fullName}}</p>
-                        <p>{{f.region}}</p>
-                    </div>
-                    <span class="farmer-area">{{f.totalLandHa}} ha</span>
-                    <div class="status-dot green"></div>
-                </div>
-                }
-            </div>
-        </div>
+@if (isLoading()) {
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+} @else {
+<div class="filter">
+    <div class="farmer-list-header">
+        <span>Total: {{ farmers().length }}</span>
+        <mat-form-field appearance="outline" floatLabel="always" style="width: 300px;">
+            <mat-label>Search Farmers</mat-label>
+            <input matInput placeholder="Search by name or phone" [value]="searchTerm()"
+                (input)="searchTerm.set($any($event.target).value)" />
+        </mat-form-field>
     </div>
-
-    <div class="card info-block">
-        <div class="profile-header">
-            <div class="farmer-avatar" [style]="{ 'background-color': farmer()?.color}">
-                {{ farmer()?.fullName?.split(' ')?.map((n) => n[0])?.join('') }}
-            </div>
-            <div class="profile-info">
-                <div class="profile-name">{{ farmer()?.fullName }} <span class="badge badge-green">{{ farmer()?.status
-                        }}</span></div>
-                <p>{{ farmer()?.region }}</p>
-            </div>
-            <div class="profile-actions">
-                <button matButton="tonal">
-                    Edit Profile
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </div>
-        </div>
-        <div class="kpi-bar">
-            <div class="kpi-item">
-                <div class="kpi-icon">
-                    <mat-icon>pin_drop</mat-icon>
-                </div>
-                <div>
-                    <div class="kpi-val">{{ farmer()?.totalLandHa }} ha</div>
-                    <div class="kpi-label">Total Area</div>
-                </div>
-            </div>
-            <div class="kpi-item">
-                <div class="kpi-icon">
-                    <mat-icon>map</mat-icon>
-                </div>
-                <div>
-                    <div class="kpi-val">{{ farmer()?.fields?.length || 0 }}</div>
-                    <div class="kpi-label">Fields</div>
-                </div>
-            </div>
-            <div class="kpi-item">
-                <div class="kpi-icon">
-                    <mat-icon>eco</mat-icon>
-                </div>
-                <div>
-                    <div class="kpi-val">{{ farmer()?.fields?.flatMap((f) => f.crops)?.length || 0 }}</div>
-                    <div class="kpi-label">Crop Varieties</div>
-                </div>
-            </div>
-            <div class="kpi-item">
-                <div class="kpi-icon">
-                    <mat-icon>bar_chart</mat-icon>
-                </div>
-                <div>
-                    <div class="kpi-val">{{ farmer()?.fields?.flatMap((f) => f.crops)?.[0]?.expectedYield || 0 }} t/ha
-                    </div>
-                    <div class="kpi-label">Average Yield</div>
-                </div>
-            </div>
-        </div>
-        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-            <mat-tab label="Overview">
-                <div class="info-block">
-                    <div class="info-block-title">Information</div>
-                    <div class="info-row">
-                        <mat-icon>email</mat-icon>
-                        <span class="info-label">Email</span>
-                        <span class="info-value">{{ farmer()?.email }}</span>
-                    </div>
-                    <div class="info-row">
-                        <mat-icon>phone</mat-icon>
-                        <span class="info-label">Phone</span>
-                        <span class="info-value">{{ farmer()?.phone }}</span>
-                    </div>
-                    <div class="info-row">
-                        <mat-icon>calendar_today</mat-icon>
-                        <span class="info-label">Created At</span>
-                        <span class="info-value">{{ farmer()?.createdAt | date:'medium' }}</span>
-                    </div>
-                    <div class="info-row">
-                        <mat-icon>person</mat-icon>
-                        <span class="info-label">Responsive Manager</span>
-                        <span class="info-value">{{ farmer()?.manager?.fullName }}</span>
-                    </div>
-                </div>
-            </mat-tab>
-            <mat-tab label="Fields">
-                <div class="info-block">
-                    {{ farmer()?.fields?.length }} fields
-                </div>
-            </mat-tab>
-            <mat-tab label="Crops">crops</mat-tab>
-            <mat-tab label="Documents">Documents</mat-tab>
-            <mat-tab label="History">History</mat-tab>
-        </mat-tab-group>
-    </div>
+    <button matButton="filled" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+        create new Farmer
+    </button>
 </div>
+<div class="farmers-layout">
+    <app-farmers-list [farmers]="farmers()" (eventFarmer)="selectFarmer($event)"
+        (eventDeleteFarmer)="deleteFarmer($event)" />
+</div>
+}
