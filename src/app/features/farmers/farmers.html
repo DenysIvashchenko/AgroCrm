@@ -8,6 +8,7 @@
             <mat-label>Search Farmers</mat-label>
             <input matInput placeholder="Search by name or phone" [value]="searchTerm()"
                 (input)="searchTerm.set($any($event.target).value)" />
+            <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
     </div>
     <button matButton="filled" (click)="openDialog()">
@@ -17,6 +18,6 @@
 </div>
 <div class="farmers-layout">
     <app-farmers-list [farmers]="farmers()" (eventFarmer)="selectFarmer($event)"
-        (eventDeleteFarmer)="deleteFarmer($event)" />
+        (eventDeleteFarmer)="openDeleteDialog($event)" />
 </div>
 }

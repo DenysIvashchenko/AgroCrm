@@ -4,7 +4,7 @@ import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-i
 
 import { CreateFarmerDto, Farmer } from '../../shared/models';
 import { FarmersList } from './farmers-list/farmers-list';
-import { debounceTime, distinctUntilChanged, finalize, merge, Subject, switchMap, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, finalize, startWith, Subject, switchMap, tap } from 'rxjs';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -15,6 +15,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateFarmer } from './create-farmer/create-farmer';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { DeleteDialog } from '../../shared/components/delete-dialog/delete-dialog';
 
 @Component({
   selector: 'app-farmers',
@@ -34,18 +35,19 @@ export class Farmers {
   private refresh$ = new Subject<void>();
   private search$ = toObservable(this.searchTerm);
 
+
   public farmers = toSignal(
-    merge(this.refresh$, this.search$)
-      .pipe(
-        tap(() => this.isLoading.set(true)),
-        debounceTime(300),
+    this.refresh$.pipe(
+      startWith(null),
+      tap(() => this.isLoading.set(true)),
+      switchMap(() => this.search$.pipe(
+        debounceTime(400),
         distinctUntilChanged(),
-        switchMap(() =>
-          this.farmerService.getFarmers(this.searchTerm()).pipe(
-            finalize(() => this.isLoading.set(false))
-          )
-        )
-      ),
+      )),
+      tap(() => this.isLoading.set(true)),
+      switchMap((search) => this.farmerService.getFarmers(search)
+        .pipe(finalize(() => this.isLoading.set(false)))),
+    ),
     {
       initialValue: []
     }
@@ -63,6 +65,18 @@ export class Farmers {
     dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
       if (result) {
         this.createFarmer(result);
+      }
+    });
+  }
+
+  public openDeleteDialog(id: number | string): void {
+    const dialogRef = this.dialog.open(DeleteDialog, {
+      data: { message: 'Are you sure you want to delete this farmer ?' },
+    });
+
+    dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
+      if (result) {
+        this.deleteFarmer(id);
       }
     });
   }

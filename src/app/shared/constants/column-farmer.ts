@@ -5,6 +5,7 @@ export const COLUMN_FARMER = [
     'phone',
     'email',
     'status',
+    'region',
     'totalLandHa',
     'manager',
     'fields',

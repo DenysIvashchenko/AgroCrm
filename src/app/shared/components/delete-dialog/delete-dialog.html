@@ -1,0 +1,7 @@
+<mat-dialog-content class="mat-typography">
+    <p>{{data.message}}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button matButton="outlined" (click)="dialogRef.close(false)">Cancel</button>
+    <button matButton="filled" color="warn" (click)="dialogRef.close(true)">Delete</button>
+</mat-dialog-actions>
