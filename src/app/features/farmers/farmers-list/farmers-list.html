@@ -56,7 +56,7 @@
             <td mat-cell *matCellDef="let farmer">
                 <div class="actions">
                     <span class="view" (click)="this.eventFarmer.emit(farmer)">
-                        <mat-icon>visibility</mat-icon>
+                        <mat-icon>info</mat-icon>
                     </span>
                     <span class="view" *appHasRole="['ADMIN', 'MANAGER']" (click)="eventDeleteFarmer.emit(farmer.id)">
                         <mat-icon style="color:#ba1a1a">delete</mat-icon>

@@ -3,7 +3,6 @@
 } @else {
 <div class="filter">
     <div class="farmer-list-header">
-        <span>Total: {{ farmers().length }}</span>
         <mat-form-field appearance="outline" floatLabel="always" style="width: 300px;">
             <mat-label>Search Farmers</mat-label>
             <input matInput placeholder="Search by name or phone" [value]="searchTerm()"
@@ -19,5 +18,6 @@
 <div class="farmers-layout">
     <app-farmers-list [farmers]="farmers()" (eventFarmer)="selectFarmer($event)"
         (eventDeleteFarmer)="openDeleteDialog($event)" />
+    <div><span>Total: {{ farmers().length }}</span></div>
 </div>
 }

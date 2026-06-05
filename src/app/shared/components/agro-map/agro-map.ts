@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, computed, ElementRef, input, OnDestroy, output, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, computed, effect, ElementRef, input, OnDestroy, output, signal, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { PolygonCoords } from '../../models/types/poligons.type';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-agro-map',
@@ -13,21 +14,37 @@ export class AgroMap implements AfterViewInit, OnDestroy {
 
   public readonly = input<boolean>(false);
   public initialGeoJson = input<string | null>(null);
+  public height = input<number>(400);
+
+  public polygons = input<any[]>([]);
+  private mapReady = signal(false);
 
   public polygonChange = output<PolygonCoords | null>();
 
   private map: any = null;
   private polygon: any = null;
   private markers: any[] = [];
-  private L: any = null;
+  private drawnPolygons: any[] = [];
 
   public pointsCount = signal(0);
   public hasPolygon = computed(() => this.pointsCount() >= 4);
 
-  async ngAfterViewInit(): Promise<void> {
-    this.L = await import('leaflet');
+  constructor() {
+    effect(() => {
+      const polys = this.polygons();
+      const ready = this.mapReady();
+
+      if (ready && polys.length > 0) {
+        this.clearBackendPolygons();
+        this.drawBackendPolygons(polys);
+      }
+    });
+  }
+
+  ngAfterViewInit(): void {
     this.fixLeafletIcons();
     this.initMap();
+    this.mapReady.set(true);
 
     if (this.initialGeoJson()) {
       this.restorePolygon(this.initialGeoJson()!);
@@ -39,7 +56,6 @@ export class AgroMap implements AfterViewInit, OnDestroy {
   }
 
   private initMap(): void {
-    const L = this.L;
     const el = this.mapEl.nativeElement;
 
     this.map = L.map(el, { zoomControl: true }).setView([50.45, 30.52], 13);
@@ -71,7 +87,6 @@ export class AgroMap implements AfterViewInit, OnDestroy {
   }
 
   private onMapClick(e: any): void {
-    const L = this.L;
     const latlng = e.latlng;
 
     const marker = L.circleMarker([latlng.lat, latlng.lng], {
@@ -88,7 +103,6 @@ export class AgroMap implements AfterViewInit, OnDestroy {
   }
 
   private redrawPolygon(): void {
-    const L = this.L;
     const points = this.markers.map(m => m.latlng);
 
     if (this.polygon) this.map.removeLayer(this.polygon);
@@ -122,7 +136,6 @@ export class AgroMap implements AfterViewInit, OnDestroy {
 
   private restorePolygon(geoJsonStr: string): void {
     try {
-      const L = this.L;
       const geo = JSON.parse(geoJsonStr);
       const coords = geo.geoJson;
       const latLngs = coords.map((c: number[]) => ({ lat: c[1], lng: c[0] }));
@@ -140,10 +153,36 @@ export class AgroMap implements AfterViewInit, OnDestroy {
   }
 
   private fixLeafletIcons(): void {
-    (this.L as any).Icon.Default.mergeOptions({
+    L.Icon.Default.mergeOptions({
       iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
       iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
       shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
     });
+  }
+
+  private drawBackendPolygons(polygons: any[]): void {
+    if (!this.map || polygons.length === 0) return;
+
+    polygons.forEach((p, i) => {
+      const polygon = L.polygon(p.polygon, {
+        color: p.color ?? '#3d7a1e',
+        fillColor: 'rgb(209, 209, 209)',
+        fillOpacity: 0.3,
+      })
+        .addTo(this.map)
+        .bindPopup(`Поле №${i + 1}`);
+
+      this.drawnPolygons.push(polygon);
+    });
+
+    // if (this.drawnPolygons.length > 0) {
+    //   const group = L.featureGroup(this.drawnPolygons);
+    //   this.map.fitBounds(group.getBounds(), { padding: [20, 20] });
+    // }
+  }
+
+  private clearBackendPolygons(): void {
+    this.drawnPolygons.forEach(layer => this.map.removeLayer(layer));
+    this.drawnPolygons = [];
   }
 }
