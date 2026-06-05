@@ -1,0 +1,53 @@
+<div class="field-list card">
+    <table mat-table matSort [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell mat-sort-header="id" *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let field"> {{field.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell mat-sort-header="name" *matHeaderCellDef>Name </th>
+            <td mat-cell *matCellDef="let field"> {{field.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="areaHa">
+            <th mat-header-cell mat-sort-header="areaHa" *matHeaderCellDef> Area Ha </th>
+            <td mat-cell *matCellDef="let field"> {{field.areaHa}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell mat-sort-header="status" *matHeaderCellDef>status </th>
+            <td mat-cell *matCellDef="let field"> {{field.status}} </td>
+        </ng-container>
+        <ng-container matColumnDef="soilType">
+            <th mat-header-cell mat-sort-header="soilType" *matHeaderCellDef>Soil Type </th>
+            <td mat-cell *matCellDef="let field"> {{field.soilType}} </td>
+        </ng-container>
+        <ng-container matColumnDef="latLng">
+            <th mat-header-cell mat-sort-header="latLng" *matHeaderCellDef> LatLng </th>
+            <td mat-cell *matCellDef="let field"> {{field.latLng || 'N/A'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="crops">
+            <th mat-header-cell mat-sort-header="crops" *matHeaderCellDef> Crops </th>
+            <td mat-cell *matCellDef="let field"> {{field.crops.length || 'N/A'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+            <th mat-header-cell mat-sort-header="createdAt" *matHeaderCellDef> Created At </th>
+            <td mat-cell *matCellDef="let field"> {{field.createdAt | date:'short'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let field">
+                <div class="actions">
+                    <span class="view">
+                        <mat-icon>info</mat-icon>
+                    </span>
+                    <span class="view" *appHasRole="['ADMIN', 'MANAGER']">
+                        <mat-icon style="color:#ba1a1a">delete</mat-icon>
+                    </span>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsField; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsField;"></tr>
+    </table>
+</div>

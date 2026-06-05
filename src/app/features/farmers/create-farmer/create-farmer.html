@@ -12,7 +12,6 @@
                 <input formControlName="phone" matInput placeholder="Phone Number" />
             </mat-form-field>
         </div>
-
         <div class="info">
             <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
                 <mat-label>Email</mat-label>
@@ -54,6 +53,20 @@
                                 <mat-option [value]="soil.value">{{soil.label}}</mat-option>
                                 }
                             </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="info">
+                        <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                            <mat-label>Latitude</mat-label>
+                            <input formControlName="latitude" matInput placeholder="Latitude" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                            <mat-label>Longitude</mat-label>
+                            <input formControlName="longitude" matInput placeholder="Longitude" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                            <mat-label>Boundary Coordinates</mat-label>
+                            <input formControlName="boundaryCoordinates" matInput placeholder="Boundary Coordinates" />
                         </mat-form-field>
                     </div>
                     <div class="info">

@@ -1,0 +1,24 @@
+.field-list {
+    overflow: auto;
+    height: 650px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .06), 0 4px 16px rgba(0, 0, 0, .04);
+    border: 1px solid #E4EDE4;
+
+    .view {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .mat-icon {
+        color: var(--color-primary);
+
+        &:hover {
+            color: var(--color-primary-light);
+        }
+    }
+}

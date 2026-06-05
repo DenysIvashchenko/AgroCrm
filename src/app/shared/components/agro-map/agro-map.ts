@@ -172,13 +172,18 @@ export class AgroMap implements AfterViewInit, OnDestroy {
         .addTo(this.map)
         .bindPopup(`Поле №${i + 1}`);
 
+      L.circleMarker(p.polygon[0], {
+        radius: 4,
+        color: '#6d0e0e',
+        fillColor: '#f50f0f',
+        fillOpacity: 1
+      })
+        .addTo(this.map)
+
       this.drawnPolygons.push(polygon);
     });
 
-    // if (this.drawnPolygons.length > 0) {
-    //   const group = L.featureGroup(this.drawnPolygons);
-    //   this.map.fitBounds(group.getBounds(), { padding: [20, 20] });
-    // }
+
   }
 
   private clearBackendPolygons(): void {
