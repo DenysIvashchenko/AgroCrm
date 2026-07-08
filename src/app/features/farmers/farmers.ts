@@ -35,7 +35,6 @@ export class Farmers {
   private refresh$ = new Subject<void>();
   private search$ = toObservable(this.searchTerm);
 
-
   public farmers = toSignal(
     this.refresh$.pipe(
       startWith(null),

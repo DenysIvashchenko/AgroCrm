@@ -2,12 +2,13 @@ import { inject, Injectable } from '@angular/core';
 import { FarmersApiService } from './farmers-api-service';
 import { Observable } from 'rxjs';
 import { CreateFarmerDto, Farmer } from '../../shared/models';
+import { FarmerRepository } from './entity/farmer.repository';
 
 
 @Injectable({
   providedIn: 'root',
 })
-export class FarmersService {
+export class FarmersService implements FarmerRepository {
 
   private readonly api = inject(FarmersApiService);
 

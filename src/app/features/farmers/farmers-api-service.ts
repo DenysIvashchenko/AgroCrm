@@ -3,12 +3,13 @@ import { inject, Injectable } from '@angular/core';
 import { ENV } from '../../../environment/environment.token';
 import { Observable } from 'rxjs';
 import { CreateFarmerDto, Farmer } from '../../shared/models';
+import { FarmerRepository } from './entity/farmer.repository';
 
 
 @Injectable({
   providedIn: 'root',
 })
-export class FarmersApiService {
+export class FarmersApiService implements FarmerRepository {
   private http = inject(HttpClient);
   private URL = inject(ENV).apiEndpoint;
 
