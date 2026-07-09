@@ -328,3 +328,43 @@ button {
 //   outline: 2px solid var(--agri-500) !important;
 //   outline-offset: 2px !important;
 // }
+
+.snackbar-error {
+  background-color: #f44336 !important;
+  color: white !important;
+
+  .mdc-snackbar__label {
+    color: white;
+    font-weight: 500;
+  }
+}
+
+.snackbar-warning {
+  background-color: #ff9800 !important;
+  color: white !important;
+
+  .mdc-snackbar__label {
+    color: white;
+    font-weight: 500;
+  }
+}
+
+.snackbar-info {
+  background-color: #2196f3 !important;
+  color: white !important;
+
+  .mdc-snackbar__label {
+    color: white;
+    font-weight: 500;
+  }
+}
+
+.snackbar-success {
+  background-color: #4caf50 !important;
+  color: white !important;
+
+  .mdc-snackbar__label {
+    color: white;
+    font-weight: 500;
+  }
+}

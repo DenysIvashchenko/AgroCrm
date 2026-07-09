@@ -1,0 +1,16 @@
+@if (isLoading()) {
+<mat-progress-bar mode="indeterminate" />
+} @else {
+<div class="control-panel">
+    <button matIconButton color="primary"
+        (click)="currentSectionSignal.set(currentSection.MAP)"><mat-icon>map</mat-icon></button>
+    <button matIconButton color="primary"
+        (click)="currentSectionSignal.set(currentSection.LIST)"><mat-icon>list</mat-icon></button>
+</div>
+@if(currentSection.MAP === currentSectionSignal()) {
+<app-agro-map [height]="700" [readonly]="true" [polygons]="polygons()" />
+}
+@if(currentSection.LIST === currentSectionSignal()) {
+<app-field-list [fields]="fields()" />
+}
+}

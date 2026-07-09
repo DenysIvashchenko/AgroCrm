@@ -2,7 +2,7 @@ import { Crop } from "./crop.type";
 import { Farmer } from "./farmer.type";
 import { SoilType } from "../enums/soil-type.enum";
 
-export interface Field {
+export type Field = {
     id: number;
     name: string;
     areaHa: number;

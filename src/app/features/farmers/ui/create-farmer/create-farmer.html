@@ -1,0 +1,90 @@
+<h2 mat-dialog-title>Create Farmer</h2>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="formFarmer">
+        <p class="personal-info">Personal Information</p>
+        <div class="info">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                <mat-label>Full Name</mat-label>
+                <input formControlName="fullName" matInput placeholder="Farmer Full Name" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                <mat-label>Phone</mat-label>
+                <input formControlName="phone" matInput placeholder="Phone Number" />
+            </mat-form-field>
+        </div>
+        <div class="info">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput placeholder="Farmer Email" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                <mat-label>Region</mat-label>
+                <input formControlName="region" matInput placeholder="Region" />
+            </mat-form-field>
+        </div>
+        <div class="info">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always" style="width: 200px;">
+                <mat-label>Total Land (ha)</mat-label>
+                <input formControlName="totalLandHa" type="number" matInput placeholder="Total Land in hectares" />
+            </mat-form-field>
+        </div>
+        <div class="add-field">
+            <button matButton="outlined" color="primary" (click)="addField()"><mat-icon>add_location_alt</mat-icon> Add
+                Field</button>
+        </div>
+        <div formArrayName="fields">
+            @for (ctrl of fieldsArray.controls; track $index) {
+            <div class="field">
+                <div [formGroupName]="$index" class="field-card">
+                    <p class="field-info">Field {{$index + 1}}</p>
+                    <div class="info">
+                        <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                            <mat-label>Field Name</mat-label>
+                            <input formControlName="name" matInput placeholder="Field Name" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                            <mat-label>Area (ha)</mat-label>
+                            <input formControlName="areaHa" type="number" matInput placeholder="Area in hectares" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                            <mat-label>Soil Type</mat-label>
+                            <mat-select formControlName="soilType" placeholder="Soil Type">
+                                @for (soil of soilType; track soil.value) {
+                                <mat-option [value]="soil.value">{{soil.label}}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="info">
+                        <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                            <mat-label>Latitude</mat-label>
+                            <input formControlName="latitude" matInput placeholder="Latitude" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                            <mat-label>Longitude</mat-label>
+                            <input formControlName="longitude" matInput placeholder="Longitude" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" [hideRequiredMarker]="false" floatLabel="always">
+                            <mat-label>Boundary Coordinates</mat-label>
+                            <input formControlName="boundaryCoordinates" matInput placeholder="Boundary Coordinates" />
+                        </mat-form-field>
+                    </div>
+                    <div class="info">
+                        <app-agro-map style="width: 100%;"
+                            (polygonChange)="onPolygonChange($event, $index)"></app-agro-map>
+                    </div>
+                </div>
+
+                <button mat-icon-button style="color:#ba1a1a" (click)="removeField($index)" class="remove-field-btn">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            }
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button matButton mat-dialog-close (click)="cancel()">Cancel</button>
+    <button matButton="filled" [mat-dialog-close]="true" cdkFocusInitial (click)="createFarmer()"
+        [disabled]="isValid()">Create</button>
+</mat-dialog-actions>

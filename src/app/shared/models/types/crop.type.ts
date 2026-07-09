@@ -2,7 +2,7 @@ import { CropStatus } from "../enums/crops-status.enum";
 import { Field } from "./field.type";
 
 
-export interface Crop {
+export type Crop = {
     id: number;
     cropType: string;
     season: string;

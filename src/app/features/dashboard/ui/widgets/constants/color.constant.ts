@@ -1,0 +1,4 @@
+export const SOIL_TYPE_COLORS = ['#1A202C', '#C05621', '#ECC94B', '#744210', '#4A5568', '#718096'];
+export const CROP_STATUS_COLORS = ['#4299E1', '#48BB78', '#A0AEC0', '#F56565'];
+export const EQUIPMENT_STATUS_COLORS = ['#38A169', '#3182CE', '#ED8936', '#E53E3E', '#718096'];
+
