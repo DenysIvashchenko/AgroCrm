@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ENV } from '../../../environment/environment.token';
 import { Observable } from 'rxjs';
-import { CreateFarmerDto, Farmer } from '../../shared/models';
-import { FarmerRepository } from './entity/farmer.repository';
+import { FarmerRepository } from '../domain/farmer.repository';
+import { ENV } from '../../../../environment/environment.token';
+import { CreateFarmerDto, Farmer } from '../../../shared/models';
 
 
 @Injectable({

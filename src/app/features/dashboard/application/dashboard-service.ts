@@ -1,12 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DashboardApiService } from './dashboard-api-service';
-import { DashboardChartsResponse } from './models/dashboard-chart.type';
+import { DashboardApiService } from '../infrastructure/dashboard-api-service';
+import { DashboardChartsResponse } from '../domain/dashboard-chart.type';
+import { DashboardRepository } from '../domain/dashboard.repository';
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class DashboardService {
+export class DashboardService implements DashboardRepository {
   private readonly api = inject(DashboardApiService);
 
   public getDashboard(): Observable<any> {

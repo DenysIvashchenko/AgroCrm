@@ -1,12 +1,12 @@
 
 import { Component, effect, input, output, ViewChild } from '@angular/core';
-import { Farmer } from '../../../shared/models';
+import { Farmer } from '../../../../shared/models';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { COLUMN_FARMER, FARMER_STATUSES } from '../../../shared/constants';
-import { HasRole } from "../../../shared/directives/has-role";
+import { COLUMN_FARMER, FARMER_STATUSES } from '../../../../shared/constants';
+import { HasRole } from "../../../../shared/directives/has-role";
 
 @Component({
   selector: 'app-farmers-list',

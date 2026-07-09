@@ -1,12 +1,12 @@
 import { Injectable, Type } from '@angular/core';
-import { CropStatusChartResponse, DashboardChartsResponse, EquipmentStatusChartResponse, NgxChartSeries, SoilTypeChartResponse } from '../models/dashboard-chart.type';
-import { Chart } from './chart/chart';
+import { CropStatusChartResponse, DashboardChartsResponse, EquipmentStatusChartResponse, NgxChartSeries, SoilTypeChartResponse } from '../domain/dashboard-chart.type';
+import { Chart } from '../ui/widgets/chart/chart';
 import { SoilType } from '../../../shared/models/enums/soil-type.enum';
 import { CropStatus } from '../../../shared/models/enums/crops-status.enum';
-import { Card } from './card/card';
-import { DashboardResponse } from '../models/dashboard.type';
+import { Card } from '../ui/widgets/card/card';
+import { DashboardResponse } from '../domain/dashboard.type';
 import { EquipmentStatus } from '../../../shared/models/enums/equipment.enum';
-import { CROP_STATUS_COLORS, EQUIPMENT_STATUS_COLORS, SOIL_TYPE_COLORS } from './constants/color.constant';
+import { CROP_STATUS_COLORS, EQUIPMENT_STATUS_COLORS, SOIL_TYPE_COLORS } from '../ui/widgets/constants/color.constant';
 
 export interface WidgetRenderInstruction<T> {
   componentClass: Type<any>;

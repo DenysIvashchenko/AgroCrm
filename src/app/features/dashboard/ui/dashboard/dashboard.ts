@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, viewChild, ViewContainerRef } from '@angular/core';
-import { DashboardService } from './dashboard-service';
-import { WidgetFactoryService } from './widgets/widget-factory';
-import { WidgetRenderer } from './widgets/widget-renderer';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal, viewChild, ViewContainerRef } from '@angular/core';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EquipmentLoadDto } from '../../domain/dashboard-chart.type';
+import { DashboardService, WidgetFactoryService, WidgetRenderer } from '../../application';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +21,8 @@ export class Dashboard implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   private service = inject(DashboardService);
+
+  public equipmentLoads = signal<EquipmentLoadDto[]>([]);
 
   ngOnInit(): void {
     this.service.getDashboard().pipe(
@@ -47,18 +50,18 @@ export class Dashboard implements OnInit {
 
     this.service.getDashboardCharts().pipe(
       takeUntilDestroyed(this.destroyRef)
-    ).subscribe({
-      next: (response) => {
-        const chartInstructions = this.factory.mapResponseToWidgets(response);
+    ).subscribe((response) => {
+      this.equipmentLoads.set(response.equipmentLoads);
 
-        chartInstructions.forEach(instruction => {
-          this.renderer.renderWithData(
-            this.chartViewContainerRef(),
-            instruction.componentClass,
-            instruction.payload
-          );
-        });
-      }
-    });
+      const chartInstructions = this.factory.mapResponseToWidgets(response);
+      chartInstructions.forEach(instruction => {
+        this.renderer.renderWithData(
+          this.chartViewContainerRef(),
+          instruction.componentClass,
+          instruction.payload
+        );
+      });
+    }
+    );
   }
 }

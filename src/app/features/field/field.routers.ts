@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { Field } from "./field";
+import { Field } from "./ui/field/field";
 
 export const FIELD_ROUTES: Routes = [
     {

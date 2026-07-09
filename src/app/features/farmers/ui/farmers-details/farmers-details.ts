@@ -1,5 +1,5 @@
 import { Component, computed, inject, input, OnInit, signal, DestroyRef } from '@angular/core';
-import { Farmer } from '../../../shared/models';
+import { Farmer } from '../../../../shared/models';
 
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,11 +7,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 
 import { DatePipe } from '@angular/common';
-import { FarmersService } from '../farmers-service';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FarmersService } from '../../application/farmers-service';
 
 @Component({
   selector: 'app-farmers-details',

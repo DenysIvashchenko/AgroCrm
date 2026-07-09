@@ -3,10 +3,11 @@ import { Component, effect, input, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { COLUMN_FIELD } from '../../../shared/constants/column-field';
-import { Field } from '../../../shared/models';
-import { HasRole } from '../../../shared/directives/has-role';
-import { CROP_STATUS_COLORS, SOIL_TYPE_COLORS } from '../../../shared/constants/status-color.constant';
+import { HasRole } from '../../../../shared/directives/has-role';
+import { COLUMN_FIELD } from '../../../../shared/constants/column-field';
+import { Field } from '../../../../shared/models';
+import { CROP_STATUS_COLORS, SOIL_TYPE_COLORS } from '../../../../shared/constants/status-color.constant';
+
 
 
 @Component({

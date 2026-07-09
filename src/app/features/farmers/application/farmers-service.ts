@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { FarmersApiService } from './farmers-api-service';
+
 import { Observable } from 'rxjs';
-import { CreateFarmerDto, Farmer } from '../../shared/models';
-import { FarmerRepository } from './entity/farmer.repository';
+import { FarmerRepository } from '../domain/farmer.repository';
+import { CreateFarmerDto, Farmer } from '../../../shared/models';
+import { FarmersApiService } from '../infrastructure/farmers-api-service';
 
 
 @Injectable({

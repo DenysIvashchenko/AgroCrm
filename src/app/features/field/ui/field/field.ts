@@ -1,13 +1,16 @@
 import { Component, inject, signal, DestroyRef } from '@angular/core';
-import { FieldService } from './field-service';
+
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { AgroMap } from '../../shared/components/agro-map/agro-map';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { FieldList } from './field-list/field-list';
-import { Field as FarmerField } from '../../shared/models';
+import { AgroMap } from '../../../../shared/components/agro-map/agro-map';
+import { FieldList } from '../field-list/field-list';
+import { FieldService } from '../../application/field-service';
+import { Field as FarmerField } from '../../../../shared/models';
+
 
 enum SectionField {
   MAP,

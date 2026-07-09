@@ -1,9 +1,7 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { FarmersService } from './farmers-service';
+
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 
-import { CreateFarmerDto, Farmer } from '../../shared/models';
-import { FarmersList } from './farmers-list/farmers-list';
 import { debounceTime, distinctUntilChanged, finalize, startWith, Subject, switchMap, tap } from 'rxjs';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -12,10 +10,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { CreateFarmer } from './create-farmer/create-farmer';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { DeleteDialog } from '../../shared/components/delete-dialog/delete-dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FarmersList } from '../farmers-list/farmers-list';
+import { FarmersService } from '../../application/farmers-service';
+import { CreateFarmer } from '../create-farmer/create-farmer';
+import { CreateFarmerDto, Farmer } from '../../../../shared/models';
+import { DeleteDialog } from '../../../../shared/components/delete-dialog/delete-dialog';
 
 @Component({
   selector: 'app-farmers',
@@ -28,6 +30,7 @@ export class Farmers {
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
   readonly dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
 
   public isLoading = signal<boolean>(false);
   public searchTerm = signal<string>('');
@@ -94,6 +97,14 @@ export class Farmers {
     this.farmerService.createFarmer(farmer)
       .pipe(
         takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => this.refresh$.next());
+      .subscribe(() => {
+        this.refresh$.next();
+        this.snackBar.open('Farmer created successfully!', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-success']
+        });
+      });
   }
 }

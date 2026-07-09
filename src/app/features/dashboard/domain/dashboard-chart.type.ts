@@ -7,6 +7,13 @@ export type SoilTypeChartResponse = {
     siltCount: number;
 }
 
+export type EquipmentLoadDto = {
+    id: number;
+    name: string;
+    type: string;
+    loadPercent: number;
+}
+
 export type CropStatusChartResponse = {
     growingCount: number;
     harvestedCount: number;
@@ -25,7 +32,8 @@ export type EquipmentStatusChartResponse = {
 export type DashboardChartsResponse = {
     soilTypeChart: SoilTypeChartResponse;
     cropStatusChart: CropStatusChartResponse;
-    equipmentStatusChar: EquipmentStatusChartResponse
+    equipmentStatusChar: EquipmentStatusChartResponse;
+    equipmentLoads: EquipmentLoadDto[];
 }
 
 export type NgxChartSeries = {

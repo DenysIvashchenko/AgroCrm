@@ -1,5 +1,5 @@
 import { inject, Injectable, Injector, ViewContainerRef } from '@angular/core';
-import { WIDGET_DATA, WidgetContext } from './constants/widget.constant';
+import { WIDGET_DATA, WidgetContext } from '../ui/widgets/constants/widget.constant';
 
 
 @Injectable({

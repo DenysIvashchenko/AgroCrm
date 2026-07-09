@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ENV } from '../../../environment/environment.token';
-import { DashboardResponse } from './models/dashboard.type';
-import { DashboardChartsResponse } from './models/dashboard-chart.type';
+import { ENV } from '../../../../environment/environment.token';
+import { DashboardResponse } from '../domain/dashboard.type';
+import { DashboardChartsResponse } from '../domain/dashboard-chart.type';
+import { DashboardRepository } from '../domain/dashboard.repository';
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class DashboardApiService {
+export class DashboardApiService implements DashboardRepository {
   private URL = inject(ENV).apiEndpoint;
   private http = inject(HttpClient);
 

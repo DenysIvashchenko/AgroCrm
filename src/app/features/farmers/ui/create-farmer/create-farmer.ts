@@ -8,10 +8,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-import { SoilType } from '../../../shared/models/enums/soil-type.enum';
-import { SOIL_TYPES } from '../../../shared/constants';
-import { AgroMap } from '../../../shared/components/agro-map/agro-map';
-import { PolygonCoords } from '../../../shared/models/types/poligons.type';
+import { SoilType } from '../../../../shared/models/enums/soil-type.enum';
+import { SOIL_TYPES } from '../../../../shared/constants';
+import { AgroMap } from '../../../../shared/components/agro-map/agro-map';
+import { PolygonCoords } from '../../../../shared/models/types/poligons.type';
 
 @Component({
   selector: 'app-create-farmer',
